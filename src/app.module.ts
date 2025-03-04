@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
-import { CryptocurrencyModule } from './cryptocurrency/cryptocurrency.module';
-import { TransactionModule } from './transaction/transaction.module';
+import { DatabaseModule } from './infrastructure/database/database.module';
+import { WalletController } from './modules/wallets/interface/wallet.controller';
+import { WalletService } from './modules/wallets/application/wallet.service';
+import { SeederService } from './infrastructure/database/seeder.service';
 
 @Module({
-  imports: [UserModule, CryptocurrencyModule, TransactionModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [DatabaseModule],
+  controllers: [WalletController],
+  providers: [WalletService, SeederService],
 })
 export class AppModule {}
