@@ -19,16 +19,15 @@ export class SeederService {
   ) {}
 
   async seed() {
-    // Create mock users
+    // Create a mock user
     const user = this.userRepository.create({
       user_id: uuidv4(),
-      username: 'manow_nutcha',
-      email: 'nutchakk.dev@gmail.com',
-      password_hash: 'p@ssw0rd',
+      username: 'manow_nutcja',
+      email: 'nutchall.dev@gmail.com',
     });
     await this.userRepository.save(user);
 
-    // Create mock cryptocurrencies
+    // Create a mock cryptocurrency
     const crypto = this.cryptoRepository.create({
       crypto_id: uuidv4(),
       name: 'Bitcoin',
@@ -37,12 +36,12 @@ export class SeederService {
     });
     await this.cryptoRepository.save(crypto);
 
-    // Create mock wallets
+    // Create a mock wallet
     const wallet = this.walletRepository.create({
       wallet_id: uuidv4(),
       user: user,
       cryptocurrency: crypto,
-      balance: 1.0,
+      balance: 2.5,
     });
     await this.walletRepository.save(wallet);
   }

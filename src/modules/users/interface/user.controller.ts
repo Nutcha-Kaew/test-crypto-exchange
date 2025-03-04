@@ -1,12 +1,12 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { UserService } from '../application/user.service';
+import { WalletService } from 'src/modules/wallets/application/wallet.service';
 
-@Controller('users')
+@Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly walletService: WalletService) {}
 
-  @Get(':userId')
-  getUser(@Param('userId') userId: string) {
-    return this.userService.findOne(userId);
+  @Get(':userId/wallets')
+  async getWalletsByUser(@Param('userId') userId: string) {
+    return this.walletService.getWalletsByUser(userId);
   }
 }
