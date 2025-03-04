@@ -2,11 +2,10 @@ import { Entity, PrimaryColumn, Column, ManyToOne } from 'typeorm';
 import { User } from 'src/modules/users/domain/user.entity';
 import { Cryptocurrency } from 'src/modules/cryptocurrencies/domain/cryptocurrency.entity';
 
-
 @Entity()
-export class Wallets {
+export class Transaction {
   @PrimaryColumn()
-  wallet_id: string;
+  transaction_id: string;
 
   @Column()
   created_at: Date;
@@ -18,17 +17,29 @@ export class Wallets {
   deleted_at: Date;
 
   @Column()
-  user_id: string;
+  from_user_id: string;
+
+  @Column()
+  to_user_id: string;
 
   @Column()
   crypto_id: string;
 
   @Column('decimal')
-  balance: number;
+  amount: number;
 
-  @ManyToOne(() => User, user => user.wallets)
-  user: User;
+  @Column()
+  transaction_type: string;
 
-  @ManyToOne(() => Cryptocurrency, cryptocurrency => cryptocurrency.wallets)
+  @Column()
+  status: string;
+
+  @ManyToOne(() => User, user => user.transactions_from)
+  from_user: User;
+
+  @ManyToOne(() => User, user => user.transactions_to)
+  to_user: User;
+
+  @ManyToOne(() => Cryptocurrency, cryptocurrency => cryptocurrency.transactions)
   cryptocurrency: Cryptocurrency;
 }

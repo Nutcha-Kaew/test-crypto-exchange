@@ -1,48 +1,32 @@
-// src/infrastructure/database/seeder/seeder.service.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Users } from 'src/modules/users/domain/user.entity';
-import { Cryptocurrencys } from 'src/modules/cryptocurrencies/domain/cryptocurrency.entity';
+import { User } from 'src/modules/users/domain/user.entity';
 import { Wallets } from 'src/modules/wallets/domain/wallet.entity';
-import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class SeederService {
   constructor(
-    @InjectRepository(Users)
-    private userRepository: Repository<Users>,
-    @InjectRepository(Cryptocurrencys)
-    private cryptoRepository: Repository<Cryptocurrencys>,
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
     @InjectRepository(Wallets)
-    private walletRepository: Repository<Wallets>,
+    private walletsRepository: Repository<Wallets>,
   ) {}
 
   async seed() {
-    // Create a mock user
-    const user = this.userRepository.create({
-      user_id: uuidv4(),
-      username: 'manow_nutcja',
-      email: 'nutchall.dev@gmail.com',
+    const user = this.usersRepository.create({
+      user_id: '1',
+      username: 'manow_nutcha',
+      email: 'nutchakk.dev@gmail.com.com',
+      password_hash: 'hashedpassword',
     });
-    await this.userRepository.save(user);
+    await this.usersRepository.save(user);
 
-    // Create a mock cryptocurrency
-    const crypto = this.cryptoRepository.create({
-      crypto_id: uuidv4(),
-      name: 'Bitcoin',
-      symbol: 'BTC',
-      price: 50000,
+    const wallet = this.walletsRepository.create({
+      wallet_id: '1',
+      user_id: user.user_id,
+      balance: 0.5,
     });
-    await this.cryptoRepository.save(crypto);
-
-    // Create a mock wallet
-    const wallet = this.walletRepository.create({
-      wallet_id: uuidv4(),
-      user: user,
-      cryptocurrency: crypto,
-      balance: 2.5,
-    });
-    await this.walletRepository.save(wallet);
+    await this.walletsRepository.save(wallet);
   }
 }

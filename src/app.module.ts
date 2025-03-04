@@ -1,26 +1,25 @@
-// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './modules/users/user.module';
+import { UsersModule } from './modules/users/users.module';
 import { CryptocurrencyModule } from './modules/cryptocurrencies/cryptocurrency.module';
-import { Users } from './modules/users/domain/user.entity';
-import { Cryptocurrencys } from './modules/cryptocurrencies/domain/cryptocurrency.entity';
-import { Wallets } from './modules/wallets/domain/wallet.entity';
-import { SeederService } from './infrastructure/database/seeder.service';
 import { WalletsModule } from './modules/wallets/wallets.module';
+import { User } from './modules/users/domain/user.entity';
+import { Cryptocurrency } from './modules/cryptocurrencies/domain/cryptocurrency.entity';
+import { Wallets } from './modules/wallets/domain/wallet.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: ':memory:', 
-      entities: [Users, Cryptocurrencys, Wallets], 
-      synchronize: true,  
-      dropSchema: true,  
+      database: 'database.sqlite',
+      entities: [User, Cryptocurrency, Wallets],
+      synchronize: true, 
     }),
-    UserModule,
-    CryptocurrencyModule, WalletsModule
+    UsersModule,
+    CryptocurrencyModule,
+    WalletsModule,
   ],
-  providers: [SeederService], 
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

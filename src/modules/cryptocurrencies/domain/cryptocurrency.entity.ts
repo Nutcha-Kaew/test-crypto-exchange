@@ -1,10 +1,21 @@
-// src/domain/entities/cryptocurrency.entity.ts
-import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
+import { Wallets } from 'src/modules/wallets/domain/wallet.entity';
+import { Transaction } from 'src/modules/transaction/domain/transaction.entity';
+import { Order } from 'src/modules/order/domain/order.entity';
 
 @Entity()
-export class Cryptocurrencys {
+export class Cryptocurrency {
   @PrimaryColumn()
   crypto_id: string;
+
+  @Column()
+  created_at: Date;
+
+  @Column()
+  updated_at: Date;
+
+  @Column({ nullable: true })
+  deleted_at: Date;
 
   @Column()
   name: string;
@@ -15,12 +26,13 @@ export class Cryptocurrencys {
   @Column('decimal')
   price: number;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @OneToMany(() => Wallets, wallet => wallet.cryptocurrency)
+  wallets: Wallets[];
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  
+  @OneToMany(() => Transaction, transaction => transaction.cryptocurrency)
+  transactions: Transaction[];
 
-  @DeleteDateColumn()
-  deleted_at: Date;
+  @OneToMany(() => Order, order => order.cryptocurrency)
+  orders: Order[];
 }

@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WalletService } from '../application/wallet.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Wallets } from 'src/modules/wallets/domain/wallet.entity';
-import { Users } from 'src/modules/users/domain/user.entity';
-import { Cryptocurrencys } from 'src/modules/cryptocurrencies/domain/cryptocurrency.entity';
+import { Wallets } from '../domain/wallet.entity';
+import { User} from 'src/modules/users/domain/user.entity';
+import { Cryptocurrency } from 'src/modules/cryptocurrencies/domain/cryptocurrency.entity';
 import { Repository } from 'typeorm';
 
 describe('WalletService', () => {
   let walletService: WalletService;
   let walletRepository: Repository<Wallets>;
-  let userRepository: Repository<Users>;
-  let cryptoRepository: Repository<Cryptocurrencys>;
+  let userRepository: Repository<User>;
+  let cryptoRepository: Repository<Cryptocurrency>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -21,11 +21,11 @@ describe('WalletService', () => {
           useClass: Repository,
         },
         {
-          provide: getRepositoryToken(Users),
+          provide: getRepositoryToken(User),
           useClass: Repository,
         },
         {
-          provide: getRepositoryToken(Cryptocurrencys),
+          provide: getRepositoryToken(Cryptocurrency),
           useClass: Repository,
         },
       ],
@@ -33,8 +33,8 @@ describe('WalletService', () => {
 
     walletService = module.get<WalletService>(WalletService);
     walletRepository = module.get<Repository<Wallets>>(getRepositoryToken(Wallets));
-    userRepository = module.get<Repository<Users>>(getRepositoryToken(Users));
-    cryptoRepository = module.get<Repository<Cryptocurrencys>>(getRepositoryToken(Cryptocurrencys));
+    userRepository = module.get<Repository<User>>(getRepositoryToken(User));
+    cryptoRepository = module.get<Repository<Cryptocurrency>>(getRepositoryToken(Cryptocurrency));
   });
 
   it('should be defined', () => {
@@ -42,12 +42,12 @@ describe('WalletService', () => {
   });
 
   it('should return wallets for a user', async () => {
-    const mockUser = new Users();
+    const mockUser = new User();
     mockUser.user_id = 'user-id-123';
     mockUser.username = 'john_doe';
     mockUser.email = 'john@example.com';
 
-    const mockCrypto = new Cryptocurrencys();
+    const mockCrypto = new Cryptocurrency();
     mockCrypto.crypto_id = 'crypto-id-123';
     mockCrypto.name = 'Bitcoin';
     mockCrypto.symbol = 'BTC';
