@@ -18,4 +18,10 @@ import { SeederService } from './seeder.service';
   providers: [SeederService],
   exports: [SeederService],
 })
+   "SCSS": {
+      "formatter": "prettier",
+      "format_on_save": "on",
+      "tab_size": 2,
+      "hard_tabs": false
+    },
 export class DatabaseModule {}
