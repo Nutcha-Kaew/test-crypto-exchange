@@ -34,9 +34,4 @@ export class Order {
   @Column()
   status: string;
 
-  @ManyToOne(() => User, user => user.orders)
-  user: User;
-
-  @ManyToOne(() => Cryptocurrency, cryptocurrency => cryptocurrency.orders)
-  cryptocurrency: Cryptocurrency;
 }
