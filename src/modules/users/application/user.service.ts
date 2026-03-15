@@ -12,7 +12,7 @@ export class UsersService {
   ) {}
 
   async findUserWithWallets(userId: string): Promise<User | null> {
-    return this.usersRepository.findOne({
+    return this.usersRepository.findAll({
       where: { user_id: userId },
       relations: ['wallets'],
     });
