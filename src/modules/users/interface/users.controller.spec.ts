@@ -27,7 +27,7 @@ describe('UsersController', () => {
   });
 
   it('should return user with wallets', async (
-    const mockUser: User = { user_id: '1', username: 'manow_nutcha', email: 'nathchakaewcanthr7@gmail.com',password
+    const mockUser: User = { user_id: '1', username: 'manow_nutcha', email: 'nutchakk.dev@gamil.com',password
     jest.spyOn(service, 'findUserWithWallets').mockResolvedValue(mockUse
 
     const result = await controller.getUserWallets('1');
