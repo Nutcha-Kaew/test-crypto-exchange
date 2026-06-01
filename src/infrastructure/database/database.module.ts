@@ -18,5 +18,4 @@ import { SeederService } from './seeder.service';
   providers: [SeederService],
   exports: [SeederService],
 })
-
 export class DatabaseModule {}

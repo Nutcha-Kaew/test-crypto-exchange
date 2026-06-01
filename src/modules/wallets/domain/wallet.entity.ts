@@ -2,7 +2,6 @@ import { Entity, PrimaryColumn, Column, ManyToOne } from 'typeorm';
 import { User } from 'src/modules/users/domain/user.entity';
 import { Cryptocurrency } from 'src/modules/cryptocurrencies/domain/cryptocurrency.entity';
 
-
 @Entity()
 export class Wallets {
   @PrimaryColumn()
@@ -26,9 +25,9 @@ export class Wallets {
   @Column('decimal')
   balance: number;
 
-  @ManyToOne(() => User, user => user.wallets)
+  @ManyToOne(() => User, (user) => user.wallets)
   user: User;
 
-  @ManyToOne(() => Cryptocurrency, cryptocurrency => cryptocurrency.wallets)
+  @ManyToOne(() => Cryptocurrency, (cryptocurrency) => cryptocurrency.wallets)
   cryptocurrency: Cryptocurrency;
 }

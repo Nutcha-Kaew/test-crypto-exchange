@@ -26,13 +26,12 @@ export class Cryptocurrency {
   @Column('decimal')
   price: number;
 
-  @OneToMany(() => Wallets, wallet => wallet.cryptocurrency)
+  @OneToMany(() => Wallets, (wallet) => wallet.cryptocurrency)
   wallets: Wallets[];
 
-  
-  @OneToMany(() => Transaction, transaction => transaction.cryptocurrency)
+  @OneToMany(() => Transaction, (transaction) => transaction.cryptocurrency)
   transactions: Transaction[];
 
-  @OneToMany(() => Order, order => order.cryptocurrency)
+  @OneToMany(() => Order, (order) => order.cryptocurrency)
   orders: Order[];
 }

@@ -12,7 +12,6 @@ describe('UsersController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [
-
         {
           provide: UsersService,
           useValue: {
@@ -26,9 +25,15 @@ describe('UsersController', () => {
     service = module.get<UsersService>(UsersService);
   });
 
-  it('should return user with wallets', async (
-    const mockUser: User = { user_id: '1', username: 'manow_nutcha', email: 'nutchakk.dev@gamil.com',password
-    jest.spyOn(service, 'findUserWithWallets').mockResolvedValue(mockUse
+  it('should return user with wallets', async () => {
+    const mockUser: User = {
+      user_id: '1',
+      username: 'manow_nutcha',
+      email: 'nutchakk.dev@gmail.com',
+      password_hash: 'hashedpassword',
+    } as User;
+
+    jest.spyOn(service, 'findUserWithWallets').mockResolvedValue(mockUser);
 
     const result = await controller.getUserWallets('1');
     expect(result).toEqual(mockUser);
@@ -37,6 +42,8 @@ describe('UsersController', () => {
   it('should throw NotFoundException if user not found', async () => {
     jest.spyOn(service, 'findUserWithWallets').mockResolvedValue(null);
 
-    await expect(controller.getUserWallets('1')).rejects.toThrow(NotFoundException);
+    await expect(controller.getUserWallets('1')).rejects.toThrow(
+      NotFoundException,
+    );
   });
 });

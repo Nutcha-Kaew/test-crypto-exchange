@@ -7,7 +7,9 @@ export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
   @Get('user/:user_id')
-  async getWalletsByUser(@Param('user_id') user_id: string): Promise<Wallets[]> {
+  async getWalletsByUser(
+    @Param('user_id') user_id: string,
+  ): Promise<Wallets[]> {
     return this.walletService.getWalletsByUser(user_id);
   }
 }

@@ -30,6 +30,6 @@ export class FiatTransaction {
   @Column()
   status: string;
 
-  @ManyToOne(() => User, user => user.fiat_transactions)
+  @ManyToOne(() => User, (user) => user.fiat_transactions)
   user: User;
 }

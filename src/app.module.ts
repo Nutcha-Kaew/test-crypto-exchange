@@ -13,7 +13,7 @@ import { Wallets } from './modules/wallets/domain/wallet.entity';
       type: 'sqlite',
       database: 'database.sqlite',
       entities: [User, Cryptocurrency, Wallets],
-      synchronize: true, 
+      synchronize: true,
     }),
     UsersModule,
     CryptocurrencyModule,

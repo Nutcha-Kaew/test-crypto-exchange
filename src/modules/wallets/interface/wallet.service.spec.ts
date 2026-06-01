@@ -2,15 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { WalletService } from '../application/wallet.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Wallets } from '../domain/wallet.entity';
-import { User} from 'src/modules/users/domain/user.entity';
+import { User } from 'src/modules/users/domain/user.entity';
 import { Cryptocurrency } from 'src/modules/cryptocurrencies/domain/cryptocurrency.entity';
 import { Repository } from 'typeorm';
 
 describe('WalletService', () => {
   let walletService: WalletService;
   let walletRepository: Repository<Wallets>;
-  let userRepository: Repository<User>;
-  let cryptoRepository: Repository<Cryptocurrency>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -20,21 +18,13 @@ describe('WalletService', () => {
           provide: getRepositoryToken(Wallets),
           useClass: Repository,
         },
-        {
-          provide: getRepositoryToken(User),
-          useClass: Repository,
-        },
-        {
-          provide: getRepositoryToken(Cryptocurrency),
-          useClass: Repository,
-        },
       ],
     }).compile();
 
     walletService = module.get<WalletService>(WalletService);
-    walletRepository = module.get<Repository<Wallets>>(getRepositoryToken(Wallets));
-    userRepository = module.get<Repository<User>>(getRepositoryToken(User));
-    cryptoRepository = module.get<Repository<Cryptocurrency>>(getRepositoryToken(Cryptocurrency));
+    walletRepository = module.get<Repository<Wallets>>(
+      getRepositoryToken(Wallets),
+    );
   });
 
   it('should be defined', () => {

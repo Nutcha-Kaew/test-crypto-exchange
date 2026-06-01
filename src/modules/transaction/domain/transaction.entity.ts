@@ -34,12 +34,15 @@ export class Transaction {
   @Column()
   status: string;
 
-  @ManyToOne(() => User, user => user.transactions_from)
+  @ManyToOne(() => User, (user) => user.transactions_from)
   from_user: User;
 
-  @ManyToOne(() => User, user => user.transactions_to)
+  @ManyToOne(() => User, (user) => user.transactions_to)
   to_user: User;
 
-  @ManyToOne(() => Cryptocurrency, cryptocurrency => cryptocurrency.transactions)
+  @ManyToOne(
+    () => Cryptocurrency,
+    (cryptocurrency) => cryptocurrency.transactions,
+  )
   cryptocurrency: Cryptocurrency;
 }

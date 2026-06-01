@@ -11,10 +11,10 @@ import { CryptocurrencyModule } from '../cryptocurrencies/cryptocurrency.module'
   imports: [
     TypeOrmModule.forFeature([Wallets]),
     UsersModule,
-    CryptocurrencyModule, 
+    CryptocurrencyModule,
   ],
-  controllers: [WalletController], 
-  providers: [WalletService], 
-  exports: [WalletService], 
+  controllers: [WalletController],
+  providers: [WalletService],
+  exports: [WalletService],
 })
 export class WalletsModule {}

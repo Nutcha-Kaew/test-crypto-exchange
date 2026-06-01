@@ -7,7 +7,11 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get(':id/wallets')
-  async getUserWallets(@Param('id') userId: string): Promise< User | null> {
-    return this.usersService.findUserWithWallets(userId);
+  async getUserWallets(@Param('id') userId: string): Promise<User | null> {
+    const user = await this.usersService.findUserWithWallets(userId);
+    if (!user) {
+      throw new (await import('@nestjs/common')).NotFoundException();
+    }
+    return user;
   }
 }

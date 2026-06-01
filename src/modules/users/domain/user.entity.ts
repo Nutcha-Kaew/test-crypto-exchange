@@ -27,18 +27,18 @@ export class User {
   @Column()
   password_hash: string;
 
-  @OneToMany(() => Wallets, wallet => wallet.user)
+  @OneToMany(() => Wallets, (wallet) => wallet.user)
   wallets: Wallets[];
 
-  @OneToMany(() => Transaction, transaction => transaction.from_user)
+  @OneToMany(() => Transaction, (transaction) => transaction.from_user)
   transactions_from: Transaction[];
 
-  @OneToMany(() => Transaction, transaction => transaction.to_user)
+  @OneToMany(() => Transaction, (transaction) => transaction.to_user)
   transactions_to: Transaction[];
 
-  @OneToMany(() => Order, order => order.user)
+  @OneToMany(() => Order, (order) => order.user)
   orders: Order[];
 
-  @OneToMany(() => FiatTransaction, fiatTransaction => fiatTransaction.user)
+  @OneToMany(() => FiatTransaction, (fiatTransaction) => fiatTransaction.user)
   fiat_transactions: FiatTransaction[];
 }
