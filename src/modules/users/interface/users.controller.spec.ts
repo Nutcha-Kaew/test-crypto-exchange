@@ -42,8 +42,6 @@ describe('UsersController', () => {
   it('should throw NotFoundException if user not found', async () => {
     jest.spyOn(service, 'findUserWithWallets').mockResolvedValue(null);
 
-    await expect(controller.getUserWallets('1')).rejects.toThrow(
-      NotFoundException,
-    );
+    await expect(controller.getUserWallets('1')).rejects.toThrow(NotFoundException);
   });
 });
